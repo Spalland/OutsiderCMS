@@ -1,0 +1,76 @@
+<script type="text/ng-template" id="page-id-1">
+	<div class="row text-center">
+		<h2>What would you like to do?</h2>
+	</div>
+	
+	<div class="row text-center">
+		<button class="btn btn-default btn-semi-wide" ng-click="image.setPage(2)">Use and existing image</button>
+	</div>
+
+	
+	<div class="row text-center">
+		<button class="btn btn-default btn-semi-wide" ng-click="image.setPage(3)">Upload a new image</button>
+	</div>
+</script>
+
+<script type="text/ng-template" id="page-id-2">
+
+		<div class="col-md-12">
+			<button class="btn btn-default pull-left" ng-click="image.setPage(1)">Back</button>
+			<button class="btn btn-default pull-right" ng-click="image.setPage(4)">Crop</button>
+		</div>
+
+		
+		<div ng-repeat="(key, val) in image.data.images | groupBy: 'createdAt'" class="col-md-12">
+			<div class="image-list-seperator">
+				<div class="image-list-seperator-tag col-md-2"  style="after:"> {{key  | date:"dd/MM/yyyy"}}</div>
+				<div ng-repeat="i in val" class="col-md-2" style="padding:0;">
+			
+				
+						<div ng-class="{selected : i.selected == true}" ng-click="image.select(i)" class="list-image" style="background-image:url({{'https://s3-eu-west-1.amazonaws.com/' + image.bucket + '/small/' + i.filename}})"></div>
+					
+					</div>
+						
+										
+	
+				
+				</div>
+			</div>
+		</div>
+
+</script>
+
+<script type="text/ng-template" id="page-id-3">
+	<div class="col-md-12">
+			<button class="btn btn-default pull-left" ng-click="image.setPage(1)">Back</button>
+			<button class="btn btn-default pull-right" ng-click="image.setPage(2)">Image List</button>
+	</div>
+	<div class="row">
+			<div class="drop-zone" type="file" ngf-multiple="true" ng-model-options="{allowInvalid: true}" name="files" ngf-pattern="'image/jpeg,image/png'" ngf-accept="'image/jpeg,image/png'" ngf-select="" ngf-drop="" ngf-max-size="20MB" ng-model="image.data.files">
+				<h3 class="text-center drop-zone-text">Drop images here to upload</h2>
+			</div>
+		</div>
+	
+</script>
+
+<script type="text/ng-template" id="page-id-4">
+	<div class="col-md-12">
+		<button class="btn btn-default pull-left" ng-click="image.setPage(2)">Image Select</button>
+		<button class="btn btn-default pull-right" ng-click="image.saveCrop()" ng-if="!image.cropSuccess">Save Crop</button>
+		<button class="btn btn-default pull-right" ng-click="image.setPage(5)" ng-if="image.cropSuccess">Confirm</button>
+	</div>
+	
+			
+	<img-manipulator img-src="image.activeImageUrl" aspect-ratio="image.cropAspectRatio" unsaved-changes="image.unsavedChanges" offset-x="image.offsetX" offset-y="image.offsetY" crop-width="image.cropWidth" crop-height="image.cropHeight"></img-manipulator>
+						
+						
+						
+</script>
+
+<script type="text/ng-template" id="page-id-5">
+	
+	<img ng-src="{{'https://s3-eu-west-1.amazonaws.com/' + image.bucket + '/cropped/' + image.croppedImage.filename}}"/>
+	
+	<button class="btn btn-primary btn-semi-wide" ng-click="image.submit()">Choose</button>
+	
+</script>

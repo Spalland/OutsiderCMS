@@ -1,0 +1,76 @@
+<h3>Comments</h3>
+
+
+
+<h4 ng-if="!c.activeUser"><a href="/login">Sign in</a> or <a href="/signup">Signup</a> to comment</h4>
+<form ng-submit="c.postComment()" ng-if="!c.replyBoxActive && c.activeUser" >
+	<div class="form-group">
+    	<textarea class="form-control" name="body" ng-model="c.comment.body"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Post Comment</button>
+</form>
+
+<div ng-repeat="cmt in c.comments track by $index">
+	<div class="comment-box" style="margin-left:{{cmt.depth ? ((cmt.depth) * 20) + 'px' : inherit}}" ng-class="{'comment-reply' : cmt.reply_to}">
+		
+		
+		<div class="comment-box-head">
+			
+			<p class="comment-box-head-date">{{cmt.createdAt | date:'MM/dd/yyyy - h:mma'}}</p>
+			<p><a href="/users/{{cmt.username || cmt.commenter_id}}">{{cmt.username ? '@' + cmt.username : (cmt.first_name + " " + cmt.last_name)}}</a>
+			<span ng-if="cmt.inReplyToUser"> in reply to <a href="/users/{{cmt.inReplyToId}}">{{'@'+ cmt.inReplyToUser}}</a></span></p>
+			
+			
+			
+			<div class="comment-flag-box" ng-if="cmt.status !== 'deleted'">
+			
+				<a ng-if="cmt.commenter_id === c.activeUser" class="flag flag-red"><!--
+				--><div class="flag-image" ng-click="c.openConfirmDelete($index)" style="background-image:url('images/elements/categories/delete-icon.png');"></div>
+				</a>
+				<a class="flag" ng-if="c.activeUser && cmt.status !== 'flagged'">
+					<div class="flag-image" ng-click="c.createReply($index)" style="background-image:url('images/elements/categories/reply-icon.png');"></div>
+				</a>
+				<a class="flag flag-warning" ng-if="c.activeUser && cmt.status !== 'approved' && cmt.status !== 'flagged'">
+					<div class="flag-image" ng-click="c.createFlag($index)" style="background-image:url('images/elements/categories/flag-icon.png');"></div>
+				</a>		
+			</div>
+			
+			
+			
+		</div>
+		<div class="comment-box-body">
+			{{cmt.body}}
+		</div>
+		
+		<h4 ng-if="cmt.isReplying">
+			Reply - What would you like to say?
+		</h4>
+		<form ng-submit="c.postReply(cmt.id, $index)" ng-show="cmt.isReplying && c.activeUser">
+			<div class="form-group">
+				<textarea class="form-control" name="body" ng-model="c.comment.body"></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Post Reply</button>        <button ng-click="c.closeForms($index)" class="btn btn-default">Cancel</button>
+		</form>
+		
+		<h4 ng-if="cmt.isFlagging">
+			Flag comment for abuse - What is wrong with this comment?
+		</h4>
+		<form ng-submit="c.flagComment($index)" ng-show="cmt.isFlagging && c.activeUser">
+			<div class="form-group">
+				<textarea class="form-control" name="reason" ng-model="c.comment.reason"></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>        <button ng-click="c.closeForms($index)" class="btn btn-default">Cancel</button>
+		</form>
+		<h4 ng-if="cmt.isDeleting">
+			Are you sure you want to delete this comment?
+		</h4>
+		<div ng-if="cmt.isDeleting" class="clearfix"> 
+			<div class="form-group col-md-12 col-sm-12">
+				<button ng-click="c.deleteComment($index)" class="btn btn-danger col-md-3 col-sm-3">Delete</button><button ng-click="c.closeForms($index)" class="btn btn-primary col-md-3 col-md-offset-1 col-sm-offset-1 col-sm-3">Cancel</button>
+			</div>
+		</div>
+		
+
+		
+	</div>
+</div>

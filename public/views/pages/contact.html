@@ -1,0 +1,76 @@
+<div class="container"> 
+	
+	<h1>Get in contact</h1>
+	
+	<main class="col-md-7">
+		<form ng-submit="c.submit()">
+			<div class="form-group"> 
+				<label>First name</label>
+				<input type="text" class="form-control" ng-model="c.fname"/>
+			</div>
+			<div class="form-group"> 
+				<label>Last Name</label>
+				<input type="text" class="form-control" ng-model="c.lname"/>
+			</div>
+			<div class="form-group"> 
+				<label>Email (Optional - but we will need it if you want a response)</label>
+				<input type="email" class="form-control" ng-model="c.email"/>
+			</div>
+			<div class="form-group"> 
+				<label>Message</label>
+				<textarea type="text" class="form-control" ng-model="c.body"></textarea>
+			</div>
+			<div class="form-group"> 
+				<button type="submit" class="form-control btn btn-primary">Send</button>
+			</div>
+			
+		</form>
+	</main>
+	
+	<aside class="col-md-3 col-md-offset-1">
+		<h3>
+			Tell us something cool!
+		</h3>
+		
+		<p>Whether you just landed here by chance or you have a burning desire to speak to us we are all ears.....well maybe not <strong><em>all</em></strong> ears because we have hands and feet and stuff, but you know what we mean right?</p>
+		
+		<p>Here is a list of stuff we like to receive</p>
+		<ul>
+			<li>
+				Jokes
+			</li>
+			<li>
+				Stories
+			</li>
+			<li>
+				Feedback
+			</li>
+			<li>
+				Ideas and suggestions
+			</li>
+			<li>
+				Recommendations of stuff to check out
+			</li>
+		</ul>
+		
+		<p>Here is a list of stuff we don't like to receive</p>
+		<ul>
+			<li>
+				Hate mail / Abuse
+			</li>
+			<li>
+				Bills
+			</li>
+			<li>
+				Spam (Electronic kind, not the canned meat)
+			</li>
+			<li>
+				Unintelligible drivel
+			</li>
+		</ul>
+		
+		<p>With that in mind, let us know whats on yours!</p>
+		
+	</aside>
+	
+</div>

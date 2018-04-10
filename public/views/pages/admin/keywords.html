@@ -1,0 +1,102 @@
+<div class="container">
+	<h1>Manage {{kw.title}}</h1>
+	
+	<div class="row">
+		<div class="cat-container">
+			<div ng-repeat="i in kw.sections" class="col-md-4">
+				<div class="cat-box">
+					<img class="cat-box-img" lazy-image src="images/elements/16x9-placeholder-small.png" lazy="{{'https://s3-eu-west-1.amazonaws.com/' + main.bucket + '/cropped/' + i.filename}}"/>
+				
+					<h2 class="cat-box-title">{{i.title}}</h2>
+					<button class="btn btn-danger cat-box-delete" ng-click="kw.deleteKeyword(i.id)">Delete</button>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="cat-box" ng-click="kw.setEditing('Create')">
+					
+						
+					
+						<div class="create-image-box-empty create-kw well" >
+							<h3 class="image-instruction image-instruction-kw" >+</h3>
+						</div>
+					
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	
+	<div class="row" ng-if="kw.editing">
+		
+		<h2 class="col-md-12">{{kw.editType}} {{kw.titleSingular}}</h2>
+			
+			<form role="form" class="col-md-12" ng-submit="kw.submitKeyword()">
+				<div class="blue-block clearfix"> 
+			
+				<!-- Article Content Block --> 
+				
+					<div class="col-md-4 lateral-form-block">
+						
+						<!-- Article Title --> 
+						<div class="form-group clear" ng-class="articles.hasError('title')">
+							<label for="title">Title</label>
+							<input type="text" class="form-control"  ng-model="kw.kw.title" ng-blur="kw.genslug()" />
+							<br/>
+							<label ng-if="kw.title == 'Activities'"  for="type">Activity Type</label>
+							<select ng-if="kw.title == 'Activities'"  type="text" class="form-control"  ng-model="kw.kw.activity_type" >
+								<option value="Land">Land</option>
+								<option value="Water">Water</option>
+								<option value="Air">Air</option>
+							</select>
+							<br/>
+							<label for >Slug</label>
+							<input type="text" class="form-control" readonly ng-model="kw.kw.slug" />
+						</div>
+					</div>
+					
+					
+					<div class="col-md-4 lateral-form-block">
+						
+						<!-- Article Title --> 
+						<div class="form-group" ng-class="articles.hasError('title')">
+							<label for="title">Image</label>
+							<div ng-click="kw.imageModal('image_id', 'wide')">
+							
+								<div class="create-image-box kw-image-box well" ng-if="kw.currentImage">
+						
+									<img class="create-thumbnail" src="images/elements/16x9-placeholder-small.png" lazy="{{'https://s3-eu-west-1.amazonaws.com/' + main.bucket + '/cropped/' + kw.currentImage}}"/>
+								</div>
+						
+						
+								<div class="create-image-box-empty kw-image-box-empty well" ng-if="!kw.currentImage" >
+										<h3 class="image-instruction image-instruction-kw">+</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="col-md-2 lateral-form-block clearfix">
+						
+						<button type="submit" class="btn btn-warning btn-bottom col-md-12 col-sm-12 col-xs-12">{{kw.editType}}</button>
+					
+					</div>
+					
+					<div class="col-md-2 lateral-form-block clearfix">
+						
+						<button class="btn btn-danger btn-bottom col-md-12 col-sm-12 col-xs-12" ng-click="kw.cancelEditing()">Cancel</button>
+						
+					</div>
+				</div>
+				
+			</form>
+		
+	
+	</div>
+		
+	
+
+
+</div>
+
+

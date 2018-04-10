@@ -1,0 +1,14 @@
+<div class="container">
+	<h1>{{categories.pageTitle}}</h1>
+	<div class="row">
+		<div class="col-md-4 cat-container" ng-repeat="i in categories.list">
+			<a href="{{categories.type}}/{{i.slug}}">
+				<div class="cat-box">
+					<img class="cat-box-img" lazy-image src="images/elements/16x9-placeholder-small.png" lazy="{{'https://s3-eu-west-1.amazonaws.com/' + main.bucket + '/cropped/' + i.filename}}"/>
+					<h2 class="cat-box-title">{{i.title}}</h2>
+				</div>
+			</a>
+			
+		</div>
+	</div>
+</div>

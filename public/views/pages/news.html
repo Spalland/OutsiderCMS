@@ -1,0 +1,154 @@
+<div class="container">
+	<h1>{{news.title | titlecase}} Articles</h1>
+	<main class="col-md-8">
+		
+		<div class="news-head-banner clearfix">
+			<form>
+				<div class="col-md-4 col-sm-4">
+					<div class="form-group">
+						<label>Number of articles per page</label>
+						<select class="form-control article-number-select" ng-model="news.articlesPerPage" ng-init="news.articlesPerPage='10'">
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="40">40</option>
+						</select>
+					</div>
+				</div>
+
+			</form>
+			
+		</div>
+
+		<div ng-repeat="article in news.articles track by $index">
+			
+			<!-- Large article box for features and latest story -->
+			
+			<div ng-if="$index == 0 || article.featured" class="article-box clearfix">
+				
+				
+				<div class="flag-box">
+					
+					
+					<div class="flag-comments">
+						<div class="flag-comments-right"></div>
+						<div class="flag-comments-value">
+							<div class="flag-image flag-comments-image"></div>
+							{{article.comment_count || 0}}
+						</div>
+						<div class="flag-comments-left"></div>
+					</div>
+					
+					<div class="flag-comments">
+						<div class="flag-comments-right"></div>
+						<div class="flag-comments-value">
+							<a href="/categories/{{article.category_slug}}" class="flag-link">
+								{{article.category_title | titlecase }}
+							</a>
+						</div>
+						<div class="flag-comments-left"></div>
+					</div>
+					
+					<div class="flag-comments">
+						<div class="flag-comments-right"></div>
+						<div class="flag-comments-value">
+							<a href="/activities/{{article.activity_slug}}" class="flag-link">
+								{{article.activity_title | titlecase }}
+							</a>
+						</div>
+						<div class="flag-comments-left"></div>
+					</div>
+
+					
+					<a href="" class="flag flag-featured"><div class="flag-image" style="background-image:url('images/elements/categories/featured-icon.png');"></div></a>
+					
+				</div>
+				<a ng-href="{{'/articles/' + article.slug}}" style="display: block">
+					<div class="article-box-header clearfix">
+						<h6 class="article-date">
+							{{article.publish_date | date:'dd-MM-yyyy'}}
+						</h6>
+						<h1 class="article-title">
+							{{article.title | limitTo: 50}}
+						</h1>
+					</div>
+				
+					<div class="article-box-body clearfix">
+					
+						<div class="article-media">
+							<img  lazy-image class="article-image" src="images/elements/16x9-placeholder-large.png" lazy="{{'https://s3-eu-west-1.amazonaws.com/' + main.bucket + '/cropped/' + article.filename}}" fade-in />
+						</div>
+						
+						<h3 class="article-byline">{{article.byline}}</h3>
+						
+					</div>
+				</a>
+			</div>
+			
+			<div ng-if="$index > 0 && !article.featured" class="article-box-small"> 
+				
+				<div class="flag-box">
+					<div class="flag-comments">
+						<div class="flag-comments-right"></div>
+						<div class="flag-comments-value">
+							<div class="flag-image flag-comments-image"></div>
+							{{article.comment_count || 0}}
+						</div>
+						<div class="flag-comments-left"></div>
+					</div>
+					
+					<div class="flag-comments">
+						<div class="flag-comments-right"></div>
+						<div class="flag-comments-value">
+							<a href="/categories/{{article.category_slug}}" class="flag-link">
+								{{article.category_title | titlecase }}
+							</a>
+						</div>
+						<div class="flag-comments-left"></div>
+					</div>
+					
+					<div class="flag-comments">
+						<div class="flag-comments-right"></div>
+						<div class="flag-comments-value">
+							<a href="/activities/{{article.activity_slug}}" class="flag-link">
+								{{article.activity_title | titlecase }}
+							</a>
+						</div>
+						<div class="flag-comments-left"></div>
+					</div>
+				</div>
+				<a ng-href="{{'/articles/' + article.slug}}" style="display: block">	
+				<div class="article-media-small">
+						<img lazy-image class="article-image-small"  src="images/elements/16x9-placeholder-small.png" lazy="{{'https://s3-eu-west-1.amazonaws.com/' + main.bucket + '/cropped/' + article.filename}}"/>
+		
+					</div>
+				
+				<div class="article-head-small clearfix">
+					
+					<h6 class="article-date">
+						{{article.publish_date | date:'dd-MM-yyyy'}}
+					</h6>
+					<h3 class="article-title-small">
+						{{article.title | limitTo: 60}}{{article.title.length > 60 ? "..." : ""}}
+					</h3>
+					<h5>{{article.byline}}</h5>
+					
+				</div>
+				
+				</a>
+			</div> 
+		</div>
+	
+	<div class="news-tail-banner" ng-if="news.moreToLoad">
+		<h3 class="text-center" ng-click="news.loadMore()">Load {{news.articlesPerPage}} more</h3>
+	</div>	
+		
+	</main>
+	<aside class="col-md-4">
+		<newsletter></newsletter>
+		
+		<div class="ad-box-square"> 
+		</div>
+	</aside>
+</div>
+		

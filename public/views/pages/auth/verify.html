@@ -1,0 +1,32 @@
+<div class="container"> 
+	
+	<div class="col-sm-6 col-sm-offset-3">
+		
+	    <h1>Verify your email</h1>
+	
+	   
+	    <!-- verify FORM -->
+
+	   
+	    <form ng-submit="verify.verify()">
+		    
+		    <div class="form-group" ng-class="forgot.hasError('token')">
+	            <label>Token</label>
+	            <input type="text" class="form-control" name="token" ng-model="verify.signupData.token" readonly>
+	        </div>
+	        <div class="form-group" ng-class="forgot.hasError('email')">
+	            <label>Email</label>
+	            <input type="text" class="form-control" name="email" ng-model="verify.signupData.email">
+	        </div>
+	        <div class="form-group" ng-class="forgot.hasError('password')">
+	            <label>Password</label>
+	            <input type="password" class="form-control" name="password" ng-model="verify.signupData.password">
+	        </div>
+	        
+	
+	        <button type="submit" class="btn btn-primary btn-lg">Go</button>
+	    </form>
+	
+	
+	</div>
+</div>

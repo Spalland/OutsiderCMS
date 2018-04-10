@@ -1,0 +1,28 @@
+<div class="container">
+	
+	<div class="col-sm-6 col-sm-offset-3">
+		
+	    <h1>Newsletter Unsubscribe</h1>
+
+	   
+	    <!-- LOGIN FORM -->
+	   
+		<p>We try really hard to not send you a load of old rubbish when we send out our newsletter. But when you gotta go....you gotta go. As a parting gift to us we would love to hear what it was that got you here.....keep it clean please</p>
+		<p>Can't be bothered? Don't worry its optional.</p>
+	    <form ng-submit="u.unsub()">
+	        <div class="form-group">
+	            <label>Token</label>
+	            <input type="text" class="form-control" name="token" ng-model="u.token" readonly>
+	        </div>
+	        <div class="form-group">
+	            <label>Reason</label>
+	            <textarea ng-model="u.reason" class="form-control"></textarea>
+	        </div>
+	
+	        <button type="submit" class="btn btn-primary btn-lg">Unsubscribe</button>
+	    </form>
+	
+	</div>
+	</main>
+	
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+
+	<h1>Articles</h1>
+	
+	
+	<div>
+		<div class="form-group">
+				
+			<input id="f-published" type="checkbox" ng-model="articles.filters.published" ng-change="articles.change()">
+			<label class="filter-label" for="f-published"><div class="filter-light"></div>Published</label> 	
+	</div>
+
+	<a href="/admin/articles/create"><button class="btn btn-info">Create New Article</button></a>
+
+	<table class="list article-list">
+		<thead class="article-list-header">
+			<th>Article Title</th>
+			<th class="text-center">Publish Date</th>
+			<th class="text-center">Article Status</th>
+			<th class="text-center">Edit</th>
+			<th class="text-center">Delete</th>
+		</thead>
+		<tr ng-repeat="article in articles.articles | filter:articles.hidePublished">
+			<td>{{article.title}}</td>
+			<td class="text-center">{{article.publish_date | date:"dd/MM/yyyy"}}</td>
+			<td class="list-status text-center"><p><div class="list-status-button list-status-button-{{article.status}}"></div>{{article.status}}</p></td>
+			<td class="list-edit text-center"><a href="/admin/articles/edit/{{article.id}}"<button class="btn btn-info">Edit</button></a></td>
+			<td class="list-cancel text-center"><button class="btn btn-danger" ng-click="articles.deleteArticle(article.id)" hide-unless="Editor">Delete</button></td>
+		</tr>
+	</table>		
+			
+	<div class="v-padding v-padding-40"></div>	
+	
+</div>

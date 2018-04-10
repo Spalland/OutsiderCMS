@@ -1,0 +1,45 @@
+<div id="img-viewer-container">
+	
+	<div id="img-viewer"> 
+		
+		<img id="img-viewer-img"  ng-src="{{imgSrc}}" />
+		
+		<div id="crop-box" style="background-image:url('{{imgSrc}}')">
+			<div id="img-viewer-crop-grid">
+				<!-- Third's rule grid -->
+				<div id="thirds-left"></div>
+				<div id="thirds-right"></div>
+				<div id="thirds-top"></div>
+				<div id="thirds-bottom"></div>
+		
+		
+		
+				<!-- These are the resizing points on the div. -->
+				<div id="handles-top-left" class="resize-handle resize-control" ></div>
+				<div id="handles-top-center" class="resize-handle resize-control" ></div>
+				<div id="handles-top-right" class="resize-handle resize-control" ></div>
+		
+				<div id="handles-middle-left" class="resize-handle resize-control" ></div>
+				<div id="handles-middle-right" class="resize-handle resize-control" ></div>
+		
+				<div id="handles-bottom-left" class="resize-handle resize-control" ></div>
+				<div id="handles-bottom-center" class="resize-handle resize-control" ></div>
+				<div id="handles-bottom-right" class="resize-handle resize-control" ></div>
+				
+		
+		
+				<!-- The invisible bars that are used to resize the div -->
+				<div id="bounds-top" class="resize-control"></div>
+				<div id="bounds-bottom" class="resize-control"></div>
+				<div id="bounds-right" class="resize-control"></div>
+				<div id="bounds-left" class="resize-control"></div>
+		
+			</div>
+		</div>
+	
+		<div id="img-viewer-fade"></div>
+	</div>
+	
+	
+
+</div>

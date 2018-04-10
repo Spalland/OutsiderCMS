@@ -1,0 +1,70 @@
+<div class="container">
+	<main class="col-md-8">
+
+		<div class="page-article">
+			 
+			<h1>
+				{{article.article.title}}
+			</h1>
+			
+			<div class="article-media-video" ng-if="article.article.video">
+				<youtube-video video-id="article.article.video" player-width="'100%'" player-height="'400px'" styles="margin-top:20px;"></youtube-video>
+			</div>
+			
+			<div class="article-media-image" ng-if="!article.article.video && !article.article.gallery">
+				<img  class="article-image" src="images/elements/16x9-placeholder-large.png" ng-src="{{'https://s3-eu-west-1.amazonaws.com/' + main.bucket + '/cropped/' + article.article.filename}}" />
+			</div>
+			
+			<div class="article-media-gallery" ng-if="article.article.gallery">
+				
+			</div>
+			
+			<div ng-bind-html="article.article.body | sanitize"></div>
+			
+			
+		</div>
+		
+		<comments ng-if="article.dataReady" article-id="article.article.id"></comments>
+		
+	</main>
+</div>
+
+<div class="share-box">
+	<button class="btn-share"
+			socialshare
+			socialshare-provider="facebook"
+			socialshare-type="feed"
+			socialshare-text="{{article.article.title}}"
+			socialshare-source="outsider.guide"
+			socialshare-redirect-uri="http://outsider.guide"
+			socialshare-url="http://outsider.guide/article/{{article.article.slug}}"
+			socialshare-media="https://s3-eu-west-1.amazonaws.com/images.outsider/cropped/{{article.article.filename}}"
+			socialshare-via="1856700734560498"
+			socialshare-popup-height="300"
+			socialshare-popup-width="400"
+			socialshare-trigger="click" >
+		<i class="fa fa-facebook"></i>
+		<p>Share</p>
+    </button>
+	<button class="btn-share"
+            socialshare
+            socialshare-provider="twitter"
+            socialshare-hashtags="outside, adventure, {{article.article.activity}}"
+            socialshare-via="twitter"
+            socialshare-popup-height="300"
+            socialshare-popup-width="400"
+            socialshare-trigger="click">
+        <i class="fa fa-twitter"></i>
+         <p>Share</p>
+    </button>
+    <button class="btn-share"
+    		socialshare
+   			socialshare-provider="email"
+            socialshare-subject="Check out {{article.article.title}} on Outsider.guide!"	
+            socialshare-body="Hi, I just found this article on Outsider.guide and thought you might like it. %0A %0A Check it out at http://outsider.guide/articles/{{article.article.slug}}" >
+        <i class="fa fa-envelope"></i>
+         <p>Share</p>
+    </button>
+</div>
+		
+		

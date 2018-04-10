@@ -1,0 +1,22 @@
+<div class="container"> 
+	
+	<div class="col-sm-6 col-sm-offset-3">
+		
+	    <h1>New Password</h1>
+	
+	   
+	    <!-- RESET FORM -->
+	   
+	    <form ng-submit="reset.reset()">
+	        <div class="form-group" ng-class="forgot.hasError('password')">
+	            <label>New Password</label>
+	            <input type="password" class="form-control" name="password" ng-model="reset.signupData.password">
+	        </div>
+	        
+	
+	        <button type="submit" class="btn btn-primary btn-lg">Go</button>
+	    </form>
+	
+	
+	</div>
+</div>

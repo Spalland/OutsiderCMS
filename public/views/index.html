@@ -1,0 +1,251 @@
+<html lang=en ng-app="outsider">
+	
+<head>
+	
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<base href="/">
+	
+	<!-- Style Sheets -->
+	<link rel="stylesheet" type="text/css" href="dist/lib/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="dist/css/style.min.css"/>
+	<link rel="stylesheet" type="text/css" href="dist/css/image-cropper-styles.min.css"/>
+	<link rel="stylesheet" type="text/css" href="dist/css/loading-bar.min.css"/>
+	<link rel="stylesheet" type="text/css" href="dist/css/toast.min.css"/>
+	<link rel="stylesheet" type="text/css" href="dist/lib/fa/css/font-awesome.min.css"/>
+	
+	
+	<!-- Inline Styles -->
+	<style if-path-contains="/admin"> body{margin-top:54px} </style>
+	
+	<!-- Non Angular Dependencies -->
+	<script src="dist/lib/dependencies.min.js" type="text/javascript"></script>
+	<script src="https://www.youtube.com/iframe_api"></script>
+    <script src="dist/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script src="dist/lib/ui-tinymce.min.js" type="text/javascript"></script>
+    <script src="dist/lib/angular-filter.min.js" type="text/javascript"></script>
+    <script src="dist/lib/ngImageCropper.min.js" type="text/javascript"></script>
+	<script src="dist/lib/ng-youtube.min.js" type="text/javascript"></script>
+	<script src="dist/lib/ui-bootstrap.min.js" type="text/javascript"></script>
+	<script src="dist/lib/moment.min.js" type="text/javascript"></script>
+	<script src="dist/lib/datetime-picker.min.js"></script>
+	<script src="dist/lib/angular-socialshare.min.js"></script>
+	<script src="dist/lib/angulartics.min.js"></script>
+	<script src="dist/lib/angulartics-ga.min.js"></script>
+	<script src="dist/lib/loading-bar.min.js"></script>
+	
+	<!-- App Components --> 
+	<script src="dist/app/app.min.js"></script>
+	<script src="dist/app/routes.min.js"></script>
+	
+	<!-- Angular Services --> 
+	<script src="dist/app/services/userService.min.js"></script>
+	<script src="dist/app/services/authService.min.js"></script>
+	<script src="dist/app/services/articleService.min.js"></script>
+	<script src="dist/app/services/categoryService.min.js"></script>
+	<script src="dist/app/services/imageService.min.js"></script>
+	<script src="dist/app/services/modalService.min.js"></script>
+	<script src="dist/app/services/activityService.min.js"></script>
+	<script src="dist/app/services/commentService.min.js"></script>
+	<script src="dist/app/services/bucketService.min.js"></script>
+	<script src="dist/app/services/messageService.min.js"></script>
+	
+	
+	<!-- Angular Controllers --> 
+	<script src="dist/app/controllers/mainController.min.js"></script>
+	<script src="dist/app/controllers/userController.min.js"></script>
+	<script src="dist/app/controllers/adminController.min.js"></script>
+	<script src="dist/app/controllers/newsController.min.js"></script>
+	<script src="dist/app/controllers/articleController.min.js"></script>
+	<script src="dist/app/controllers/profileController.min.js"></script>
+	<script src="dist/app/controllers/imageController.min.js"></script>
+	<script src="dist/app/controllers/activityController.min.js"></script>
+	<script src="dist/app/controllers/activitesController.min.js"></script>
+	<script src="dist/app/controllers/categoryController.min.js"></script>
+	<script src="dist/app/controllers/categoriesController.min.js"></script>
+	<script src="dist/app/controllers/unsubController.min.js"></script>
+	<script src="dist/app/controllers/contactController.min.js"></script>
+	
+	<script src="dist/app/controllers/adminArticleController.min.js"></script>
+	<script src="dist/app/controllers/adminCategoriesController.min.js"></script>
+	<script src="dist/app/controllers/adminActivitiesController.min.js"></script>
+	
+	<!-- Angular Directives -->
+	<script src="dist/app/directives/commentsDirective.min.js"></script>
+	<script src="dist/app/directives/paginationDirective.min.js"></script>
+	<script src="dist/app/directives/toastDirective.min.js"></script>
+	<script src="dist/app/directives/lazyImage.min.js"></script>
+	<script src="dist/app/directives/newsletterDirective.min.js"></script>
+	<script src="dist/app/directives/latestArticlesDirective.min.js"></script>
+
+	
+	
+</head>
+	
+<body ng-controller="mainController as main">
+
+		
+	<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				
+				<button type="button" class="navbar-toggle" ng-click="main.collapsed = !main.collapsed">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				</button>
+				
+				<a href="#" class="pull-left">
+					<img class="brand-image" src="images/elements/site-brand-alpha.png"/>
+				</a>
+				<div class="collapse navbar-collapse" uib-collapse="main.collapsed" id="outsider-bar">
+					<ul class="nav navbar-nav pull-left navbar-link-group">
+						<li>
+							<a href="/" ng-click="main.collapsed = true">Home</a>
+						</li>
+						<li class="dropdown"  uib-dropdown>
+							<a href="#" class="dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled" role="button" aria-haspopup="true" aria-expanded="false">
+								Articles<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu>
+								<li><a href="/news" ng-click="main.collapsed = true">Latest</a></li>
+								<li><a href="/activities" ng-click="main.collapsed = true">Activities</a></li>
+								<li><a href="/categories" ng-click="main.collapsed = true">Categories</a></li>
+							</ul>
+						</li>
+						<li hide-unless="Admin" class="dropdown"  uib-dropdown>
+							<a href="#" class="dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled" role="button" aria-haspopup="true" aria-expanded="false">
+								Admin<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu>
+								<li><a href="/admin" ng-click="main.collapsed = true">Home</a></li>
+								<li><a href="/admin/articles" ng-click="main.collapsed = true">Articles</a></li>
+								<li><a href="/admin/activities" ng-click="main.collapsed = true">Activities</a></li>
+								<li><a href="/admin/categories" ng-click="main.collapsed = true">Categories</a></li>
+								<li hide-unless="Manager" ng-click="main.collapsed = true"><a href="/admin/users">Users</a></li>
+							</ul>
+						</li>
+						
+					</ul>
+				
+				
+					<ul class="nav navbar-nav pull-right">
+			
+				
+						<li ng-if="main.loggedIn" class="dropdown"  uib-dropdown>
+							<a href="#" class="dropdown-toggle navatar-dropdown" uib-dropdown-toggle ng-disabled="disabled" role="button" aria-haspopup="true" aria-expanded="false">
+								<img lazy-image class="navatar" ng-src="images/elements/avatar_blank.png"/>{{main.user.first_name + " "}}<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" uib-dropdown-menu>
+								<li><a href="/profile" ng-click="main.collapsed = true">Profile</a></li>
+								<li><a href="/logout"  ng-click="main.logout()">Logout</a></li>
+							</ul>
+						</li>
+			    
+				
+				  		<li ng-if="!main.loggedIn">
+							<a href="/login" ng-click="main.collapsed = true">Login</a>
+						</li>
+						<li ng-if="!main.loggedIn">
+							<a href="/signup" ng-click="main.collapsed = true">Signup</a>
+						</li>
+					</ul>
+				</div>
+			</div> <!-- Container --> 
+		</nav>
+<!-- show any messages that come back with authentication -->
+
+						
+		<div class="jumbotron" ng-if="!main.hideJumbo">	
+			<div class="container">	
+				
+				<img class="logo pull-left" src="images/elements/site-logo-alpha.png" />
+				
+			</div>
+		</div>
+
+
+	</header>
+
+	<div ng-view></div>
+
+	
+	
+	<footer >
+		<div class="row footer-box border">
+			<div class="container clearfix">
+				<div class="border col-md-3 col-sm-6 col-xs-6 text-left">
+					<h3>Content</h3>
+					<p><a href="/news">News</a></p>
+					<p><a href="/blogs">Blogs</a></p>
+					<p><a href="/reviews">Reviews</a></p>
+					<p><a href="/comps">Competitions</a></p>
+				</div>
+				<div class="border col-md-3 col-sm-6 col-xs-6 text-left">
+					<h3>Get to know us</h3>
+					<p><a href="/about">About Outsider</a></p>
+					<p><a href="/contact">Contact Us</a></p>
+					<p><a href="/jobs">Work With Us</a></p>
+				</div>
+				<div class="border col-md-3 col-sm-6 col-xs-6 text-left">					
+					<h3>Our Friends</h3>
+					<p><a href="/affiliates">Outsider Friends</a></p>
+				</div>
+				<div class="border col-md-3 col-sm-6 col-xs-6 social-links">
+
+					<ul><!--
+
+						
+--><li>
+							<a class="social-button social-button-twitter" href="http://twitter.com/outsider_guide"></a>
+						</li><!--
+
+						
+--><li>
+							<a class="social-button social-button-instagram" href="http://www.instagram.com/outsider_guide/"></a>
+						</li><!--
+
+						
+--><li>
+							<a class="social-button social-button-facebook" href="http:/facebook.com/outsider.guide"></a>
+						</li><!--
+
+						
+--><li>
+							<a class="social-button social-button-youtube" href="https://www.youtube.com/channel/UCpE4fFrZRaWnHqionqfRGMg"></a>
+						</li><!--
+
+					
+--></ul>
+					
+				</div>	
+			</div>
+		</div> 
+	</footer>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=1856700734560498";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+	
+	
+	<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+		
+		  ga('create', 'UA-86959009-1', window.analyticsMode);
+
+	</script>
+	
+	
+	<toasty></toasty>
+</body>
+
+</html>

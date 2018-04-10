@@ -1,0 +1,43 @@
+<div class="container">
+
+	<div class="col-sm-6 col-sm-offset-3">
+	
+	    <h1>Signup</h1>
+	    
+	       	
+	    <!-- SIGNUP FORM -->
+	    <form ng-submit="signup.signup()">
+		    
+		    <div class="form-group" ng-class="signup.hasError('username')">
+    			<label>Username</label>
+				<input type="text" class="form-control" name="username" ng-model="signup.signupData.username">
+	    	</div>
+	    	<div class="form-group" ng-class="signup.hasError('first_name')">
+    			<label>First Name</label>
+				<input type="text" class="form-control" name="first_name" ng-model="signup.signupData.first_name">
+	    	</div>   
+	    	<div class="form-group" ng-class="signup.hasError('last_name')"> 
+            	<label>Last Name</label>
+				<input type="text" class="form-control" name="last_name" ng-model="signup.signupData.last_name">
+	    	</div>
+	        <div class="form-group" ng-class="signup.hasError('email')">	  
+            	<label>Email</label>
+				<input type="text" class="form-control" name="email" ng-model="signup.signupData.email">
+	        </div>
+	        <div class="form-group" ng-class="signup.hasError('password')">
+            	<label>Password</label>
+				<input type="password" class="form-control" name="password" ng-model="signup.signupData.password">
+	        </div>
+			<div class="form-group">
+	        	<button type="submit" class="btn btn-primary btn-lg">Signup</button>
+			</div>
+	    </form>
+	
+	    <hr>
+	
+	    <p>Already a member? <a href="/login">Login</a></p>
+	
+	
+	</div>
+
+</div>

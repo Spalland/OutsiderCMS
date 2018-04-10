@@ -1,0 +1,174 @@
+<div class="container">
+	<h1>New Article</h1> 
+
+	
+	<!-- Article Submission Form -->
+	<form role="form" ng-submit="articles.submitArticle()">
+		
+		<!-- Article Content Block --> 
+		
+		<div class="col-md-8 form-block">
+			
+			<!-- Article Title --> 
+			<div class="form-group" ng-class="articles.hasError('title')">
+				<label for="title">Title</label>
+				<input type="text" class="form-control"  ng-model="articles.article.title" ng-disabled="!articles.canModify()" ng-blur="articles.genslug()"/>
+			</div>
+			
+			<!-- Article Slug -->
+			<div class="form-group" ng-class="articles.hasError('slug')">
+				<label>Permalink</label>
+				<div class="row">
+					<label class="col-md-3 col-sm-3 col-xs-4 slug-text">outsider.guide/article/</label>
+					<div class="col-md-6 col-sm-6 col-xs-5">
+						<input type="text" class="form-control" tabindex="-1" ng-model="articles.article.slug" ng-disabled="!articles.canModify()" ng-focus="articles.unReserve()" ng-blur="articles.stillReserved()"/>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-3">
+						<button type="button" class="btn btn-default" ng-click="articles.genslug()" ng-disabled="articles.slugIsReserved">Set</button>
+						<div class="status-icon status-accepted" ng-class="{'status-active' : articles.slugIsReserved}"></div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="form-group" ng-class="articles.hasError('title')">
+				<label for="Byline">Byline</label>
+				<input type="text" class="form-control" ng-disabled="!articles.canModify()" ng-model="articles.article.byline"/>
+			</div>
+			
+			<!-- Article Body --> 
+			<div class="form-group" ng-class="articles.hasError('body')">
+				<label for="body">Body</label>
+				<textarea class="form-control" rows="30" ng-disabled="!articles.canModify()" ui-tinymce="articles.tinymceOptions" ng-model="articles.article.body"></textarea>
+			</div>
+		</div> <!-- End - Article Content Block -->
+		
+		<!-- Details Block-->
+		<div class="col-md-3 col-md-offset-1 form-block">
+			
+			<!-- Article Details -->
+			<div class="form-group" ng-class="articles.hasError('updatedAt')">
+				<label>Last saved: {{articles.article.updatedAt | date:"dd/MM/yyyy 'at' hh:mm"}}</label>	
+			</div>
+			
+			<div class="form-group">
+				<button type="submit" class="btn btn-default" ng-if="articles.action == 'create'">Save</button>
+				<button type="submit" class="btn btn-default" ng-if="articles.action == 'edit'">{{articles.saveMessage}}</button>
+				
+			</div>
+			
+			<!-- Article Featured Status -->
+			<div class="form-group">
+				<input id="article-featured" type="checkbox" ng-disabled="!articles.canModify()" ng-model="articles.article.featured">
+				<label class="filter-label" for="article-featured">Featured<span class="checkbox-featured checkbox-flag" ng-if="articles.article.featured"></span></label>	
+			</div>
+		</div> <!-- End - Details Block -->
+		
+		<!-- Workflow Block -->
+		<div class="col-md-3 col-md-offset-1 form-block">
+			
+			<!-- Article Status -->
+
+			<div class="form-group">
+				<h3>{{articles.article.status}}</h3>
+				<h5>{{articles.workflowMessage()}}</h5>
+			</div>
+			
+			<!-- Article Workflow Buttons --> 
+			<!-- Draft --> 
+			<div class="form-group" ng-if="articles.article.status == 'Draft'">
+				<button type="button" class="btn btn-info btn-wide btn-white" ng-click="articles.setStatus('Submitted')" >Submit for Review</button>
+			</div>
+			
+			<!-- Review -->	
+			<div class="form-group" hide-unless="Reviewer" ng-if="articles.article.status == 'Submitted'">
+			
+				<button type="button"  class="btn btn-success btn-wide btn-white" ng-click="articles.setStatus('Approved')">Approve</button>
+				<button type="button"  class="btn btn-warning btn-wide btn-white" ng-click="articles.setStatus('Draft')">Comment</button>
+				<button type="button"  class="btn btn-danger btn-wide btn-white" ng-click="articles.setStatus('Rejected')">Deny</button>
+			
+			</div>
+			
+			<!-- Approved --> 
+			<div class="form-group" hide-unless="Editor" ng-class="articles.hasError('publish_date')" ng-if="articles.article.status == 'Approved'">
+
+					<label>Publish Date</label>
+					<p class="input-group">
+						<input class="form-control" ng-disabled="!articles.canModify()" ng-model="articles.article.publish_date" datepicker-options="{'showWeeks': false}" datetime-picker="dd/MM/yyyy HH:mm" is-open="articles.opened" ng-focus="articles.opened=true" />
+						<span class="input-group-btn">
+		                	<button type="button" class="btn btn-default btn-height" ng-click="articles.open()"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+		            </p>
+		            <button type="button" class="btn btn-success btn-wide btn-white" ng-click="articles.setStatus('Published')"> Publish</button>
+			
+			</div>
+				
+			
+		</div><!-- End - Workflow Block -->
+		
+		
+		<!-- Category Block--> 
+		<div class="col-md-3 col-md-offset-1 form-block">
+			
+			<!-- Article Category -->
+			<div class="form-group" ng-class="articles.hasError('category')">
+				<label for="catergory">Category</label>
+				<select class="form-control" ng-disabled="!articles.canModify()" ng-options="cat.id as cat.title for cat in articles.categories" ng-model="articles.article.category"></select>
+			</div>
+			
+			<div class="form-group" ng-class="articles.hasError('activity')">
+				<label for="activity">Activity</label>
+				<select class="form-control" ng-disabled="!articles.canModify()" ng-options="cat.id as cat.title for cat in articles.activities" ng-model="articles.article.activity"></select>
+			</div>
+		</div><!-- End - Category Block -->
+		
+		<!-- Media Block-->
+
+		<div class="col-md-3 col-md-offset-1 form-block">
+			
+			<div class="form-group" ng-class="articles.hasError('video')">
+				
+				<label for="videolink">Video Link</label>
+				<p class="input-group">
+					<input type="text" class="form-control" ng-disabled="!articles.canModify()" ng-model="articles.article.video" ng-blur="articles.parseVideoLink()" ng-disabled="articles.inputDisabled" />
+					<span class="input-group-btn" ng-if="articles.inputDisabled">
+	                	<button type="button" class="btn btn-default btn-height" ng-click="articles.clearVideo()"><i class="glyphicon glyphicon-remove"></i></button>
+					</span>
+					<span class="input-group-btn" ng-if="!articles.inputDisabled">
+	                	<button type="button" class="btn btn-default btn-height" ng-click="articles.verifyVideo()"><i class="glyphicon glyphicon-search"></i></button>
+					</span>
+	            </p>
+				
+				
+				<div ng-if="articles.inputDisabled" class="video-well video-well-youtube">
+					<youtube-video  video-id="articles.article.video"  player-width="'100%'" player-height="'125px'" styles="margin-top:20px;"></youtube-video>
+				</div>
+				
+				
+			</div>
+			<div class="form-group">
+				<label for="title">Poster Media</label>
+				<div ng-click="articles.imageModal('image_id', 'wide')">
+					
+					<div class="create-image-box well" ng-if="articles.currentImage">
+					
+						<img lazy-image class="create-thumbnail" src="images/elements/16x9-placeholder-small.png" lazy="{{'https://s3-eu-west-1.amazonaws.com/' + main.bucket + '/cropped/' + articles.currentImage}}"/>
+
+					</div>
+					
+					<div class="create-image-box-empty well" ng-if="!articles.currentImage">
+						<h3 class="image-instruction">+</h3>
+					</div>
+					
+				</div>
+			</div>
+		
+<!--
+			<div class="form-group">
+				<label for="title">Gallery</label>
+				<input type="text" class="form-control" style="height:150px;"  ng-model="articles.article.gallery"/>
+			</div>
+-->
+		</div> <!-- End - Image Block -->
+	</form>
+</div>

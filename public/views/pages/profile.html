@@ -1,0 +1,36 @@
+<div class="verify-warn" ng-if="!main.user.email_verified">
+	<div class="container">
+		<p>⚠️ You need to verify your email. Lost the email?
+			<button ng-click="profile.request()" class="btn" ng-class="profile.buttonDanger ? 'btn-danger' : 'btn-primary' ">{{profile.buttonMessage}}</button>
+		</p>
+	</div>
+</div>
+
+
+<div class="container">
+	<main class="col-md-8 col-sm-8 col-xs-8">
+		<h1>The adventures of...</h1>
+		
+		<div class="information">
+			
+			<h3>{{profile.user.first_name + " " + profile.user.last_name}}</h3>
+			
+			<h3>AKA</h3>
+			<h4>{{'@' + profile.user.username}}</h4>
+			
+			<h3>Adventuring Since</h3>
+			<h4>{{profile.user.createdAt | date: "d/MM/yyyy"}}</h4>
+		
+		</div>
+	
+	</main>
+	
+	<aside class="col-md-3 col-sm-3 col-xs-3">
+		
+		<div class="profile-avatar-box" ng-mouseenter="profile.hover(true)" ng-mouseleave="profile.hover(false)" style="margin-top:24px; position:relative">
+			<img class="cat-box-img" lazy-image src="images/elements/avatar_blank.png"/>
+			<button class="btn btn-default" ng-show="profile.hovering" ng-click="ctrl.launchAvatarModal()" style="position:absolute; bottom: 4px; right:10%; width:80%">Edit</button>
+		</div>
+	</aside>
+</div>
+	 

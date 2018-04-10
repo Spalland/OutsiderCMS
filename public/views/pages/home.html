@@ -1,0 +1,18 @@
+<div class="well">
+	<div class="container">
+		<h4 style="margin:0" ng-bind-html="main.motd | sanitize"></h4>
+	</div>
+</div>
+<div class="container">
+	<main class="col-md-8">
+		
+		<latest-articles count="5" bucket="{{main.bucket}}"></latest-articles>
+		<!--<h2> Latest Reviews </h2>-->
+	</main>
+	
+	<aside class="col-md-4">
+		<newsletter></newsletter>
+	</aside>
+	
+</div>
+

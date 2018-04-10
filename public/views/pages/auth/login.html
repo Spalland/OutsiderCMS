@@ -1,0 +1,32 @@
+<div class="container">
+	
+	<div class="col-sm-6 col-sm-offset-3">
+		
+	    <h1>Login</h1>
+	
+	   
+	    <!-- LOGIN FORM -->
+	   
+	    <form ng-submit="login.login()">
+	        <div class="form-group" ng-class="login.hasError('email')">
+	            <label>Email</label>
+	            <input type="text" class="form-control" name="email" ng-model="login.loginData.email">
+	        </div>
+	        <div class="form-group" ng-class="login.hasError('password')">
+	            <label>Password</label>
+	            <input type="password" class="form-control" name="password" ng-model="login.loginData.password">
+	             <p><a class="pull-right" href="/forgot">Forgotten password?</a></p>
+	        </div>
+	
+	        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+	    </form>
+	   
+	
+	    <hr>
+	
+	    <p>Need an account? <a href="/signup">Signup</a></p>
+	
+	</div>
+	</main>
+	
+</div>
