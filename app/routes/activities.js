@@ -27,10 +27,7 @@ router.get('/', function(req, res){
 			success	: true,	
 			data	: data[0]
 		});
-		
-		
 	});
-	
 });
 
 
@@ -68,7 +65,6 @@ router.post('/',  function(req, res){
 				success	: true,	
 				data	: data
 			});
-			
 		}).catch(function (err) {
     
 	    	return res.json({
@@ -76,10 +72,6 @@ router.post('/',  function(req, res){
 				error: [{message :err.message}]
 	    	});
 		});
-		
-		
-		
-		
 	}).catch(db.Sequelize.ValidationError, function (err) {
 
 
@@ -102,8 +94,7 @@ router.post('/',  function(req, res){
 	    	success: false,
 			error: [{message :err.message}]
     	});
-	});
-		
+	});	
 });
 
 
@@ -143,26 +134,21 @@ router.delete('/:id', mw.isAuthenticated("Editor"), function(req, res){
 			return res.json({
 				success	: true,	
 				data	: data
-			});
-			
+			});	
 		}).catch(function (err) {
 
 			return res.json({
 				success: false,
 				error: [{message :err.message}]
 			});
-		});
-		
-						
+		});				
 	}).catch(function (err) {
 
 		return res.json({
     		success: false,
 			error: [{message :err.message}]
 		});
-	});
-		
-					
+	});				
 });
 
 

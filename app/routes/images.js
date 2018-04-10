@@ -27,23 +27,14 @@ var s3fs		= new S3FS(config.s3Bucket , config.s3Opts);
 
 // Fetch all Images 
 
-
-
-
-
 router.get('/', mw.isAuthenticated("User"), function(req, res){	
 
 	db.Image.findAll({
 		where : { 
-			
 			uploader_id : req.user.id
 		},
-		order : [
-			['createdAt', "DESC"]
-		]
-		
+		order : [['createdAt', "DESC"]]
 	})
-	
 	.then(function(data){ 
 		
 		var fixedDates = data.map(function(e){
@@ -485,9 +476,6 @@ function resizeImageP(imageObject, maxSize, filename){
 	
 	createTrueColorP(dstW, dstH)
 	.then(function(dstImg){ 
-		
-		
-		var spoons = imageObject.img.copyResampled(dstImg, 0, 0, 0, 0, parseInt(dstW), parseInt(dstH), srcW, srcH);
 	
 		
 		var imgB64; 

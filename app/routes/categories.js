@@ -23,10 +23,7 @@ router.get('/', function(req, res){
 			success	: true,	
 			data	: data[0]
 		});
-		
-		
 	});
-	
 });
 
 // Fetch a single Article by ID

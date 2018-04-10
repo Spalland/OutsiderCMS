@@ -47,7 +47,7 @@ mw.isAuthenticated = function(role){
 		} else {
 			
 			// if there is no token
-			// return an HTTP response of 403 (access forbidden) and an error message return res.status(403).send({
+			// return an HTTP response of 403 (access forbidden) and an error message return res.status(401).send({
 			return res.status(401).send({
 				success	: false,
 				error	: [{message :'No token provided'}]
@@ -60,8 +60,7 @@ mw.isAuthenticated = function(role){
 mw.isVerified = function(){
 	
 	return function(req, res, next) {
-		
-		
+
 		if(res.user){ 
 			
 			if(req.user.email_verified){ 
@@ -74,9 +73,7 @@ mw.isVerified = function(){
 					error	: {message: 'You need to verify your email before you can do that'}
     			});
 			}
-			
-			
-			
+
 		}else{
 			
 		
@@ -118,18 +115,8 @@ mw.isVerified = function(){
 					error	: [{message :'No token provided'}]
 				});
 			}
-
 		}
-		
-		// check header or url parameters or post parameters for token
-		
-	
 	};
-
-	
-	
-	
-	
 };
 
 mw.slugCache = [];

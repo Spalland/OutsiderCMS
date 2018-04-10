@@ -135,6 +135,8 @@ router.get('/user', mw.isAuthenticated("Writer"), function(){
 });
 
 
+// Get all articles for specific user
+
 
 router.get('/user/:id', mw.isAuthenticated("Writer"), function(){ 
 	
@@ -167,6 +169,7 @@ router.get('/user/:id', mw.isAuthenticated("Writer"), function(){
 
 
 // Get all Articles in publish date order
+
 router.get('/latest', function(req, res){
 	
 	var rpp = req.query.rpp;
@@ -276,9 +279,11 @@ router.get('/reserve/:slug', function(req,res){
 	
 });
 
+
+
+// Fetch a single Article by Slug
 router.get('/article/:slug', function(req, res){	
 	
-
 	var identifier = req.params.slug;
 	
 			
@@ -314,7 +319,7 @@ router.get('/article/:slug', function(req, res){
 });
 
 
-// Fetch a single Article by slug
+// Fetch a single Article by ID
 router.get('/:id', function(req, res){	
 	
 	
